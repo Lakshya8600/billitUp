@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+
+    <h2>Dashboard</h2>
+    <div class="mb-2">
+        <div class="btn btn-primary m-2">Create Invoice</div>
+        <div class="btn btn-primary m-2">Create Purchase</div>
+        <div class="btn btn-primary m-2">Create Payment</div>
+        <div class="btn btn-primary m-2">Create Customer</div>
+        <div class="btn btn-primary m-2">Create Supplier</div>
+        <div class="btn btn-primary m-2">Create Product</div>
+    </div>
+
+    <h4>Transactions</h4>
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Type</th>
+                <th scope="col">TXN no</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>12/12/12</td>
+                <td>Invoice</td>
+                <td>1234</td>
+                <td>John Doe</td>
+                <td>$12.00</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>12/12/12</td>
+                <td>Invoice</td>
+                <td>1234</td>
+                <td>John Doe</td>
+                <td>$12.00</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>12/12/12</td>
+                <td>Invoice</td>
+                <td>1234</td>
+                <td>John Doe</td>
+                <td>$12.00</td>
+            </tr>
+        </tbody>
+    </table>
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+        var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{ ticks: { min: 6, max: 16 } }],
+                }
+            }
+        });
+    </script>
+</div>
+{% endblock %}
