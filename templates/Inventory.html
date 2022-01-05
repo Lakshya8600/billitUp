@@ -1,8 +1,41 @@
 {% include "partials/header.html" %}
 
+<style>
+#heading{
+  font-family: a;
+  padding-top: 25px ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form{
+  padding-bottom: 25px;
+}
+</style>
 <body>
     {% include "partials/navbar.html" %}
     {% block content %}
+
+    <div id="heading">
+      <h1>Add Inventory</h1>
+    </div>
+
+    <form class="container"  method="post">
+      <div class="mb-3">
+        <label class="form-label">Item Name</label>
+        <input type="text" class="form-control" id="ItemNameId" name="ItemName">
+        <div id="emailHelp" class="form-text">The Exact Name Should be Given</div>
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="ItemQuantityId" name="ItemQuantity">
+      </div>
+      <div class="mb-3">
+        <label  class="form-label">PerCost</label>
+        <input type="number" class="form-control" id="ItemPerCostId" name="ItemPerCost">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
     <table class="table ">
         <thead>
@@ -14,23 +47,15 @@
           </tr>
         </thead>
         <tbody>
+          {% for InventoryItem in InventoryList %}
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{InventoryItem.ItemName}}</td>
+            <td>{{InventoryItem.Quantity}}</td>
+            <td>{{InventoryItem.PerCost}}</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {% endfor %}
+          
         </tbody>
       </table>
 
