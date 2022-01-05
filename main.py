@@ -29,8 +29,29 @@ def Inventory():
         Inventorydb.session.commit()
 
     InventoryList = InventoryClass.query.all()
-    return render_template('Inventory.html' , InventoryList=InventoryList )
+    return render_template('Inventory.html' , InventoryList=InventoryList, InventaryUpdate=0, Heading="Add", btnname="Submit" )
 
+@app.route('/Inventorydelete/<int:sno>')
+def Inventorydelete(sno):
+    InventoryList2 = InventoryClass.query.filter_by(sno=sno).first()
+    Inventorydb.session.delete(InventoryList2)
+    Inventorydb.session.commit()
+    return redirect("/Inventory")
+
+@app.route('/InventoryUpdate/<int:sno>', methods=['GET','POST'])
+def InventoryUpdate(sno):
+    InventoryList = InventoryClass.query.all()
+    InventoryList3 = InventoryClass.query.filter_by(sno=sno).first()
+    if request.method == 'POST':
+        
+        Inventorydb.ItemName = request.form['ItemName']
+        Inventorydb.Quantity = request.form['ItemQuantity']
+        Inventorydb.PerCost = request.form['ItemPerCost']
+        Inventorydb.session.add(InventoryList3)
+        Inventorydb.session.commit()
+        return redirect('/Inventory')
+
+    return render_template('Inventory.html' , InventoryList=InventoryList, InventaryUpdate=InventoryList3, Heading="Update",btnname="Update")
 
 if __name__ == '__main__':
     app.run(debug=True)
